@@ -1,0 +1,7 @@
+node_modules
+.pnpm-store
+.data
+dist
+tmp
+docs/sources
+pnpm-lock.yaml

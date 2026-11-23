@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.env
+.data/
+.pnpm-store/
+tmp/
+coverage/
+*.log
+*.tsbuildinfo

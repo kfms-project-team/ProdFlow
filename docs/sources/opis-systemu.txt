@@ -1,0 +1,62 @@
+Proponuję, żebyśmy w ramach naszego rocznego projektu stworzyli system do zarządzania pracą w zakładzie produkcyjnym. Robocza nazwa to ProdFlow. Pomysł jest inspirowany sposobem działania systemu LF i łączy zarządzanie projektami, przydzielanie zadań, rejestrowanie obecności oraz monitorowanie postępu produkcji.
+Chciałbym, żeby powstała aplikacja, którą po zakończeniu studiów moglibyśmy dalej rozwijać i oferować firmom w abonamencie.
+System ma pomagać kierownikowi odpowiedzieć na cztery pytania: kto jest obecny w pracy, nad czym aktualnie pracuje, na jakim etapie jest zlecenie i ile czasu zajęło jego wykonanie.
+W praktyce składałby się z trzech połączonych części:
+Część systemu	Przeznaczenie
+Panel webowy dla kierownika	Zarządzanie pracownikami, projektami, zadaniami, obecnościami i raportami.
+Aplikacja terminalowa na komputerze na hali	Wyświetlanie zmieniających się kodów QR przypisanych do zakładu lub stanowiska.
+Aplikacja na telefon lub tablet pracownika	Podgląd własnych obecności i zadań, skanowanie QR oraz potwierdzanie operacji.
+
+
+Cała logika systemu i baza danych znajdowałyby się na serwerze. Telefon służyłby przede wszystkim do podglądu i prostych czynności, a pełne zarządzanie odbywałoby się przez panel webowy.
+Na początek aplikację mobilną możemy przygotować jako PWA, czyli aplikację webową dostosowaną do telefonu i możliwą do dodania do ekranu głównego na obsługiwanych urządzeniach. Pozwoli nam to wykorzystać wspólny kod dla kilku typów urządzeń.
+Przykładowy proces pracy wyglądałby następująco:
+1. Kierownik tworzy projekt, np. „Wykonanie 100 obudów dla klienta”.
+2. Dzieli go na zadania: przygotowanie elementów, obróbka, montaż i kontrola jakości.
+3. Przypisuje pracowników, stanowiska, terminy i planowany czas.
+4. Pracownik przychodzi do zakładu, skanuje telefonem QR z ekranu i potwierdza rozpoczęcie obecności.
+5. W aplikacji widzi przydzielone zadania oraz instrukcje.
+6. Po zeskanowaniu QR przy stanowisku potwierdza rozpoczęcie konkretnego zadania.
+7. Może zarejestrować przerwę, zgłosić przestój lub zakończyć zadanie i podać liczbę wykonanych sztuk.
+8. Kierownik widzi aktualny postęp, a po zakończeniu pracy otrzymuje raport.
+Obecność w zakładzie i czas wykonywania zadania byłyby liczone osobno. Dzięki temu moglibyśmy pokazać, jaka część zmiany została przeznaczona na konkretne zlecenia, przerwy i przestoje.
+Podstawowy zakres projektu obejmowałby:
+- Pracowników i uprawnienia — konta, zespoły oraz role pracownika, kierownika i administratora. Każdy ma dostęp tylko do właściwych danych.
+- Projekty i zlecenia — opis, klient, termin, priorytet, status i planowany czas realizacji.
+- Zadania i przydziały — podział projektu na etapy, przypisywanie pracowników i stanowisk oraz śledzenie statusów.
+- Obecności — wejścia, wyjścia, przerwy i historia. Kierownik może poprawić błędny wpis, podając powód; system zachowuje historię zmian.
+- Rejestrowanie pracy przez QR — rozpoczęcie, wstrzymanie i zakończenie zadania oraz zapis czasu pracy.
+- Raporty — obecność zespołu, postęp projektów, opóźnienia, porównanie czasu planowanego z rzeczywistym i eksport danych.
+Po uruchomieniu podstaw dodalibyśmy funkcje zwiększające przydatność systemu:
+Rozszerzenie	Co daje użytkownikom
+Przestoje i blokady	Informację, czy pracę zatrzymała awaria, brak materiału lub oczekiwanie na decyzję.
+Instrukcje i dokumentacja	Dostęp do zdjęć, plików i checklist potrzebnych przy zadaniu.
+Szablony projektów	Szybsze przygotowywanie powtarzalnych zleceń.
+Prosta kontrola jakości	Rejestrowanie sztuk poprawnych, odrzuconych i wymagających poprawy.
+
+
+Grafik zmian, kompetencje pracowników i szacowanie kosztów robocizny potraktowalibyśmy jako dalsze rozszerzenia, zależne od dostępnego czasu.
+Od początku musimy zadbać o wiarygodność zapisów. Kody QR powinny mieć krótki czas ważności, a operacje wykonywaliby zalogowani pracownicy. Serwer sprawdzałby uprawnienia i blokował przypadkowe podwójne zapisy. Sam kod QR nie gwarantuje fizycznej obecności, dlatego sposób jego użycia trzeba sprawdzić podczas pilotażu.
+Musimy też obsłużyć brak internetu, zapomniane wyjście czy rozładowany telefon. W pierwszej wersji operacje byłyby zapisywane online, z wyraźnym potwierdzeniem powodzenia. Wyjątki mógłby korygować przełożony.
+Pracę możemy podzielić między cztery osoby według obszarów:
+Osoba	Główna odpowiedzialność
+1	Pracownicy, konta, uprawnienia i obecności.
+2	Projekty, zadania, przydziały i panel kierownika.
+3	Terminal na hali, mechanizm QR i aplikacja mobilna.
+4	Raporty, przestoje, kontrola jakości i wdrożenie systemu.
+
+
+Każdy odpowiadałby również za testy i dokumentację swojego modułu. Architekturę, połączenia między modułami i przeglądy kodu realizowalibyśmy wspólnie.
+Plan na rok zakładałby działającą wersję podstawową po sześciu miesiącach:
+Okres	Cel
+Miesiące 1–2	Ustalenie wymagań, rozmowy z użytkownikami, makiety, model danych i prototyp skanowania QR.
+Miesiące 3–4	Konta, role, pracownicy, projekty, zadania i przydziały.
+Miesiące 5–6	Terminal, aplikacja mobilna, obecności i pomiar czasu zadań.
+Miesiące 7–9	Raporty, przestoje, instrukcje, szablony i prosta kontrola jakości.
+Miesiące 10–11	Pilotaż, testy, poprawki i przygotowanie stabilnego wdrożenia.
+Miesiąc 12	Bufor na opóźnienia, dokumentacja i prezentacja końcowa.
+
+
+Zakres trzeba dopasować do naszej dostępności. Priorytetem byłby kompletny proces: utworzenie zlecenia → przydzielenie pracownika → rejestracja pracy → raport.
+Projekt pozwoli nam pokazać na studiach projektowanie bazy danych, aplikację webową i mobilną, komunikację z serwerem, kontrolę dostępu, obsługę zdarzeń oraz testowanie całego procesu.
+Po zakończeniu projektu moglibyśmy zaoferować system małym zakładom produkcyjnym i montażowym. Model biznesowy opierałby się na miesięcznym abonamencie zależnym od wielkości firmy, z dodatkową opłatą za wdrożenie, import danych i szkolenie.

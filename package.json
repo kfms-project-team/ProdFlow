@@ -1,0 +1,24 @@
+{
+  "name": "prodflow",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@11.25.0",
+  "engines": {
+    "node": ">=22.12"
+  },
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "start:local": "node scripts/start-local.mjs",
+    "verify": "node scripts/verify.mjs",
+    "format": "prettier --write apps packages scripts docs *.json *.yaml *.md .github",
+    "build": "pnpm --filter @prodflow/api build && pnpm --filter @prodflow/web build",
+    "typecheck": "pnpm -r typecheck",
+    "test": "pnpm --filter @prodflow/api test",
+    "setup": "node scripts/setup.mjs",
+    "db:migrate": "node --env-file=.env packages/database/cli.mjs migrate",
+    "db:seed": "node --env-file=.env packages/database/cli.mjs seed"
+  },
+  "devDependencies": {
+    "prettier": "3.6.2"
+  }
+}
